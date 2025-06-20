@@ -1,0 +1,121 @@
+# Django
+*.log
+*.pot
+*.pyc
+__pycache__/
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+
+# Environment variables
+.env
+.env.local
+.env.production
+.env.staging
+
+# Virtual environments
+venv/
+env/
+ENV/
+.venv/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+*.tmp
+
+# Media files (uploads)
+media/
+!media/.gitkeep
+
+# Static files collected
+staticfiles/
+static_root/
+
+# Coverage reports
+htmlcov/
+.coverage
+.coverage.*
+coverage.xml
+*.cover
+.hypothesis/
+.pytest_cache/
+
+# Translations
+*.mo
+
+# Django stuff
+*.log
+local_settings.py
+
+# Celery
+celerybeat-schedule
+celerybeat.pid
+
+# SageMath parsed files
+*.sage.py
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# IPython
+profile_default/
+ipython_config.py
+
+# pyenv
+.python-version
+
+# Backup files
+*.bak
+*.backup
+*.old
+
+# Docker
+.dockerignore
+
+# Node modules (if using frontend tools)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Temporary files
+*.tmp
+*.temp
+.tmp/
+.temp/
+
+# Local configuration files
+local_config.py
+settings_local.py
+
+# SSL certificates
+*.pem
+*.key
+*.crt
+
+# Deployment files
+deploy_key*
+*.pem
+
+# Test files
+.tox/
+.pytest_cache/
+test-results/
+
+# MyPy
+.mypy_cache/
+.dmypy.json
+dmypy.json

@@ -1,0 +1,6 @@
+Django>=3.2
+mysqlclient>=2.1
+flake8
+coverage
+behave
+selenium
