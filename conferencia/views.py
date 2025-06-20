@@ -8,7 +8,7 @@ from django.http import JsonResponse
 from usuarios.models import CustomUser
 from notificaciones.models import Notificacion
 from .models import InvitacionRevisor, Conferencia
-from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.http import require_http_methods
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.decorators import login_required
 import json
@@ -335,8 +335,8 @@ def invitar_autor(request, conferencia_id):
     })
 
 
-@csrf_exempt
 @login_required
+@require_http_methods(["POST"])
 def enviar_revision_conferencia(request):
     """
     Recibe vía POST la decisión sobre la revisión de una conferencia y notifica al autor.
@@ -368,7 +368,7 @@ def enviar_revision_conferencia(request):
     return JsonResponse({"error": "Método no permitido"}, status=405)
 
 
-@csrf_exempt
+@require_http_methods(["POST"])
 def reportar_trabajo(request):
     """
     Marca una conferencia como trabajo reportado vía POST.
@@ -389,7 +389,6 @@ def reportar_trabajo(request):
     return JsonResponse({"status": "error"})
 
 
-@csrf_exempt
 def eliminar_trabajo(request, conf_id):
     """
     Elimina el archivo ZIP de una conferencia si está reportado y existe.
