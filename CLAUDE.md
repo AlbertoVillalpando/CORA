@@ -85,7 +85,63 @@ flake8 .
 - BDD acceptance tests using Behave + Selenium
 - Test files exclude migrations, settings, and admin files from coverage
 
+## Security Configuration
+- Environment variables managed with django-environ
+- Security headers configured for production (HSTS, XSS, CSRF protection)
+- CSRF protection properly implemented (no @csrf_exempt bypass)
+- HTTPS redirect enabled for production
+- Secure logging system for security events
+- Production settings separated from development
+
 ## Deployment
-- Dockerized application with docker-compose.yml
+
+### Quick Setup (Development)
+```bash
+# Automated development setup
+./scripts/setup-dev.sh
+
+# Manual setup
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+cp .env.example .env
+python manage.py migrate
+python manage.py runserver
+```
+
+### Production Deployment
+```bash
+# Automated production deployment
+./scripts/deploy-production.sh
+
+# Manual deployment
+pip install -r requirements.txt
+cp .env.production .env.production.local
+# Configure production variables in .env.production.local
+export DJANGO_SETTINGS_MODULE=cora.settings_production
+python manage.py check --deploy
+python manage.py migrate
+python manage.py collectstatic
+```
+
+### Environment Variables
+- **Required**: SECRET_KEY, DEBUG, ALLOWED_HOSTS
+- **Security**: SECURE_SSL_REDIRECT, CSRF_TRUSTED_ORIGINS
+- **Database**: DB_NAME, DB_USER, DB_PASSWORD (production)
+- **Email**: EMAIL_HOST, EMAIL_HOST_USER, EMAIL_HOST_PASSWORD
+- See `.env.example` for complete list
+
+### Security Features
+- SECRET_KEY from environment (not hardcoded)
+- DEBUG=False enforced in production
+- HTTPS security headers (HSTS, XSS protection)
+- CSRF protection without unsafe bypasses
+- Secure cookie settings for production
+- Security event logging to `logs/security.log`
+
+### Docker Configuration
+- Development: `docker-compose up -d --build`
+- Production: `docker-compose -f docker-compose.prod.yml up -d`
 - Uses custom proxy network for container communication
 - MariaDB with persistent volume for production data
+- Environment-based configuration
